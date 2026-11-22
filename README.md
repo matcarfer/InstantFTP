@@ -3,7 +3,7 @@
 <p align="center">
   <b>v1.2.0</b> · 2026-11-22 · Windows 98 SE → 11 · 54 KB<br>
   <a href="https://github.com/matcarfer/InstantFTP/releases/download/v1.2.0/InstantFTP_v1.2.exe"><b>⬇ Download · Descargar InstantFTP_v1.2.exe</b></a><br>
-  <sub>SHA-256 <code>19EEF05244951F05DFA8FC61CE7AF322D4D9F58C2D02F983D3EC58812012AB5E</code></sub>
+  <sub>SHA-256 <code>19EEF05244951F05DFA8FC61CE7AF322D4D9F58C2D02F983D3EC58812012AB5E</code> · <a href="https://www.virustotal.com/gui/file/19eef05244951f05dfa8fc61ce7af322d4d9f58c2d02f983d3ec58812012ab5e">VirusTotal</a></sub>
 </p>
 
 <p align="center">
@@ -30,7 +30,7 @@ Close the window to stop it. A daily log is saved in a hidden `logs` folder that
 | `folder` | Share another folder |
 
 Use options from a shortcut or a `.bat`: `InstantFTP.exe -g -u guest:1234`.
-Not code-signed: if SmartScreen appears, click **More info → Run anyway**.
+A few antivirus engines may flag it by heuristics (tiny .exe with no runtime): see the VirusTotal report. Not code-signed: if SmartScreen appears, click **More info → Run anyway**.
 
 ## Español
 
@@ -42,7 +42,7 @@ Cerrá la ventana para detenerlo. Guarda un log diario en una carpeta `logs` ocu
 Opciones: `-g` solo lectura · `-u usuario:clave` · `-p puerto` · `-tp` rango pasivo ·
 `-ha` IP pública · `-b` IP local · `-t` / `-m` inactividad / máx. clientes · `-a` archivos ocultos ·
 `-nolog` · `-lang es` · `carpeta`. Ejemplo: `InstantFTP.exe -g -u invitado:1234`.
-No está firmado: si aparece "Windows protegió tu PC", elegí **Más información → Ejecutar de todas formas**.
+Algunos antivirus pueden marcarlo por heurística (.exe muy chico, sin runtime): mirá el informe de VirusTotal. No está firmado: si aparece "Windows protegió tu PC", elegí **Más información → Ejecutar de todas formas**.
 
 ---
 
