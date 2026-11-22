@@ -54,7 +54,7 @@ Docs/tests-only changes don't.
 
 CI builds `InstantFTP.exe` as an artifact; it does NOT publish releases here.
 Releases go to the public repo **matcarfer/InstantFTP** (exe only, no source):
-download the CI artifact, rename it `InstantFTP_v<major>.<minor>.exe` (keep the
+download the CI artifact, rename it `InstantFTP-v<major>.<minor>.exe` (hyphen, never underscore) (keep the
 patch number if not 0), then `gh release create v<version> <exe> --repo
 matcarfer/InstantFTP` with bilingual notes (EN then ES) including the SHA-256,
 update the public README's download line and the row in matcarfer/library.
