@@ -1,0 +1,85 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Needed to create releases with the built-in GITHUB_TOKEN.
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Toolchain (from rust-toolchain.toml) + MinGW 32-bit
+        run: |
+          rustup show
+          sudo apt-get update
+          sudo apt-get install -y gcc-mingw-w64-i686
+
+      - name: Formatting
+        run: cargo fmt --check
+
+      - name: Unit tests
+        run: cargo test
+
+      - name: Clippy
+        run: cargo clippy -- -D warnings
+
+      - name: End-to-end tests (real FTP client)
+        run: |
+          cargo build
+          python3 tests/e2e.py target/debug/InstantFTP
+
+      - name: Build InstantFTP.exe
+        run: sh build.sh
+
+      - name: Check Windows 98 compatibility of the .exe
+        run: python3 tests/check_win98.py target/i586-win9x-windows-gnu/release/InstantFTP.exe
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: InstantFTP
+          path: |
+            target/i586-win9x-windows-gnu/release/InstantFTP.exe
+            README.md
+            LICENSE
+
+      # Always keep a release for the current version: when Cargo.toml has a
+      # version that was never released (e.g. bumped 1.1.0 -> 1.2.0), publish
+      # tag v<version> with the .exe attached as InstantFTP_v<major>.<minor>.exe
+      # (InstantFTP_v1.2.exe; patch releases keep the third number:
+      # InstantFTP_v1.2.1.exe). Otherwise do nothing.
+      - name: Publish release for a new version
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VER=$(grep -m1 '^version' Cargo.toml | cut -d'"' -f2)
+          if gh release view "v$VER" > /dev/null 2>&1; then
+            echo "v$VER is already released; bump the version in Cargo.toml to publish a new one."
+            exit 0
+          fi
+          SHORT=$(echo "$VER" | sed 's/\.0$//')
+          EXE="InstantFTP_v$SHORT.exe"
+          cp target/i586-win9x-windows-gnu/release/InstantFTP.exe "$EXE"
+          gh release create "v$VER" "$EXE" \
+            --target "$GITHUB_SHA" \
+            --title "InstantFTP $VER" \
+            --generate-notes
+
+  # Contributors on Windows must be able to run the tests natively.
+  test-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Unit tests (std backend)
+        run: cargo test
+      - name: End-to-end tests (std backend)
+        run: |
+          cargo build --features hosted
+          python tests/e2e.py target/debug/InstantFTP.exe

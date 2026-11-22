@@ -1,0 +1,31 @@
+[package]
+name = "instantftp"
+version = "1.2.0"
+edition = "2021"
+authors = ["matcarfer"]
+description = "Instant, portable FTP server: double click and the folder is shared. Windows 98 SE to 11."
+license-file = "LICENSE"
+publish = false
+repository = "https://github.com/matcarfer/InstantFTP"
+readme = "README.md"
+keywords = ["ftp", "server", "windows98", "portable", "no-std"]
+categories = ["network-programming", "command-line-utilities"]
+build = "build.rs"
+
+[features]
+# Use the Rust std backend even when targeting Windows (to run the e2e tests
+# natively on Windows: `cargo build --features hosted`).
+hosted = []
+
+[[bin]]
+name = "InstantFTP"
+path = "src/main.rs"
+
+[profile.release]
+panic = "abort"
+opt-level = "z"
+lto = true
+codegen-units = 1
+strip = true
+[profile.dev]
+panic = "abort"
