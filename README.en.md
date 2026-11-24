@@ -1,10 +1,12 @@
+<p align="center"><img src="docs/icon.png" width="96" alt="InstantFTP"></p>
+
 <h1 align="center">InstantFTP</h1>
 
-<h2 align="center"><a href="https://github.com/matcarfer/InstantFTP/releases/download/v1.2.0/InstantFTP_v1.2.exe">⬇ Download EXE</a></h2>
+<h2 align="center"><a href="https://github.com/matcarfer/InstantFTP/releases/download/v1.2.1/InstantFTP-v1.2.1.exe">⬇ Download EXE</a></h2>
 
 <p align="center">
   <a href="README.md">Español</a> · <b>English</b><br><br>
-Portable FTP server, super fast and lightweight (54 KB), no GUI.<br>
+Portable FTP server, super fast and lightweight (56 KB), no GUI.<br>
 <b>Compatible with Windows 98 SE to 11.</b>
 </p>
 
@@ -44,4 +46,4 @@ It is not code-signed. Choose **More info → Run anyway**. Some antivirus engin
 
 ---
 
-<sub>Free, closed source. Do not redistribute: share this link. No warranty. <a href="LICENSE.en">License</a> · <a href="https://www.virustotal.com/gui/file/19eef05244951f05dfa8fc61ce7af322d4d9f58c2d02f983d3ec58812012ab5e">VirusTotal</a></sub>
+<sub>Free, closed source. Do not redistribute: share this link. No warranty. <a href="LICENSE.en">License</a> · <a href="https://www.virustotal.com/gui/file/a9afe37f6d6e697e303ca853901e24afc1e59bc904038e203c4d05bbabe90602">VirusTotal</a></sub>

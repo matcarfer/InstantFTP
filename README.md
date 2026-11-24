@@ -1,10 +1,12 @@
+<p align="center"><img src="docs/icon.png" width="96" alt="InstantFTP"></p>
+
 <h1 align="center">InstantFTP</h1>
 
-<h2 align="center"><a href="https://github.com/matcarfer/InstantFTP/releases/download/v1.2.0/InstantFTP_v1.2.exe">⬇ Descargar EXE</a></h2>
+<h2 align="center"><a href="https://github.com/matcarfer/InstantFTP/releases/download/v1.2.1/InstantFTP-v1.2.1.exe">⬇ Descargar EXE</a></h2>
 
 <p align="center">
   <b>Español</b> · <a href="README.en.md">English</a><br><br>
-Servidor FTP portable, súper rápido y liviano (54 KB), sin interfaz gráfica.<br>
+Servidor FTP portable, súper rápido y liviano (56 KB), sin interfaz gráfica.<br>
 <b>Compatible con Windows 98 SE a 11.</b>
 </p>
 
@@ -44,4 +46,4 @@ No está firmado. Elegí **Más información → Ejecutar de todas formas**. Alg
 
 ---
 
-<sub>Gratis, de código cerrado. No redistribuir: compartí este link. Sin garantía. <a href="LICENSE">Licencia</a> · <a href="https://www.virustotal.com/gui/file/19eef05244951f05dfa8fc61ce7af322d4d9f58c2d02f983d3ec58812012ab5e">VirusTotal</a></sub>
+<sub>Gratis, de código cerrado. No redistribuir: compartí este link. Sin garantía. <a href="LICENSE">Licencia</a> · <a href="https://www.virustotal.com/gui/file/a9afe37f6d6e697e303ca853901e24afc1e59bc904038e203c4d05bbabe90602">VirusTotal</a></sub>
