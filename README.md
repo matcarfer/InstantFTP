@@ -1,6 +1,6 @@
 # InstantFTP (private source)
 
-Private source code of **InstantFTP**, a ~53 KB portable FTP server for
+Private source code of **InstantFTP**, a ~56 KB portable FTP server for
 Windows 98 SE through 11, written in Rust (`#![no_std]`). Closed source, not
 for distribution. Public download page (exe only):
 https://github.com/matcarfer/InstantFTP

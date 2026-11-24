@@ -5,7 +5,7 @@ this repository.
 
 ## What this project is
 
-InstantFTP: a tiny (~53 KB) portable FTP server for Windows 98 SE through 11.
+InstantFTP: a tiny (~56 KB) portable FTP server for Windows 98 SE through 11.
 Double-clicking `InstantFTP.exe` shares the folder it lives in. Author: matcarfer.
 **Closed source**: this repository is private. The .exe is freeware (see LICENSE).
 Every source file starts with a copyright line; keep it. Never mention other

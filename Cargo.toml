@@ -1,6 +1,6 @@
 [package]
 name = "instantftp"
-version = "1.2.0"
+version = "1.2.1"
 edition = "2021"
 authors = ["matcarfer"]
 description = "Instant, portable FTP server: double click and the folder is shared. Windows 98 SE to 11."

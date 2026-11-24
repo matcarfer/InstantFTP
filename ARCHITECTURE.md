@@ -102,7 +102,7 @@ Console and log texts go through `i18n::t("English", "Castellano")` or the
 otherwise the Windows language (`GetUserDefaultLangID`), otherwise English. FTP replies
 are never translated. Console texts are ASCII (the Win9x console uses an OEM code page).
 
-## Executable size (~53 KB)
+## Executable size (~56 KB)
 
 Achieved with `opt-level = "z"`, LTO, `panic = immediate-abort`, and above all
 `function-sections` in the target, which lets the linker drop unused

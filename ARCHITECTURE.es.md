@@ -102,7 +102,7 @@ Los textos de consola y log pasan por `i18n::t("English", "Castellano")` o la ma
 Windows (`GetUserDefaultLangID`), si no inglés. Las respuestas FTP no se traducen.
 Los textos de consola van en ASCII (la consola de Win9x usa página de códigos OEM).
 
-## Tamaño del ejecutable (~53 KB)
+## Tamaño del ejecutable (~56 KB)
 
 Se logra con `opt-level = "z"`, LTO, `panic = immediate-abort`, y sobre todo con
 `function-sections` en el target, que permite al linker descartar el código no
