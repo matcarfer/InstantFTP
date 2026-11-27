@@ -12,7 +12,7 @@ Portable FTP server, super fast and lightweight (56 KB), no GUI. Open source.<br
 </p>
 
 <p align="center">
-  <img src="docs/window.png" width="80%" alt="InstantFTP">
+  <img src="docs/window-v1.3.png" width="80%" alt="InstantFTP">
 </p>
 
 **How to use:** copy it into a folder and double-click it. That folder is shared until you close the window.
