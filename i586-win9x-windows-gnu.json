@@ -1,0 +1,75 @@
+{
+  "abi-return-struct-as-int": true,
+  "arch": "x86",
+  "binary-format": "coff",
+  "cpu": "pentium",
+  "data-layout": "e-m:x-p:32:32-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:32-n8:16:32-a:0:32-S32",
+  "dll-prefix": "",
+  "dll-suffix": ".dll",
+  "dll-tls-export": false,
+  "dynamic-linking": true,
+  "eh-frame-header": false,
+  "emit-debug-gdb-scripts": false,
+  "env": "gnu",
+  "exe-suffix": ".exe",
+  "features": "-mmx,-sse,-sse2,+soft-float",
+  "frame-pointer": "may-omit",
+  "function-sections": true,
+  "is-like-windows": true,
+  "late-link-args": {
+    "gnu": [
+      "-lws2_32",
+      "-lkernel32"
+    ],
+    "gnu-cc": [
+      "-lws2_32",
+      "-lkernel32"
+    ],
+    "gnu-lld": [
+      "-lws2_32",
+      "-lkernel32"
+    ],
+    "gnu-lld-cc": [
+      "-lws2_32",
+      "-lkernel32"
+    ]
+  },
+  "linker": "i686-w64-mingw32-gcc",
+  "linker-flavor": "gnu-cc",
+  "llvm-target": "i586-pc-windows-gnu",
+  "max-atomic-width": 64,
+  "os": "windows",
+  "panic-strategy": "abort",
+  "pre-link-args": {
+    "gnu": [
+      "--disable-auto-image-base",
+      "-m",
+      "i386pe",
+      "--large-address-aware"
+    ],
+    "gnu-cc": [
+      "-fno-use-linker-plugin",
+      "-Wl,--disable-auto-image-base",
+      "-Wl,--large-address-aware"
+    ],
+    "gnu-lld": [
+      "--disable-auto-image-base",
+      "-m",
+      "i386pe",
+      "--large-address-aware"
+    ],
+    "gnu-lld-cc": [
+      "-fno-use-linker-plugin",
+      "-Wl,--disable-auto-image-base",
+      "-Wl,--large-address-aware"
+    ]
+  },
+  "requires-uwtable": false,
+  "rustc-abi": "x86-softfloat",
+  "target-family": [
+    "windows"
+  ],
+  "target-mcount": "_mcount",
+  "target-pointer-width": 32,
+  "vendor": "pc"
+}

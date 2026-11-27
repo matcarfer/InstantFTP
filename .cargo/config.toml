@@ -1,0 +1,18 @@
+# Build:  cargo win      (release .exe for Windows 98SE .. Windows 11)
+[alias]
+win = "build --release --target i586-win9x-windows-gnu.json -Zbuild-std=core,alloc -Zbuild-std-features=compiler-builtins-mem -Zjson-target-spec"
+
+[target.i586-win9x-windows-gnu]
+linker = "i686-w64-mingw32-gcc"
+rustflags = [
+  "-Z", "unstable-options", "-C", "panic=immediate-abort",
+  "-C", "link-arg=-nostartfiles",
+  "-C", "link-arg=-nostdlib",
+  "-C", "link-arg=-Wl,--subsystem,console:4.0",
+  "-C", "link-arg=-Wl,--major-os-version,4",
+  "-C", "link-arg=-Wl,--minor-os-version,0",
+  "-C", "link-arg=-Wl,--major-subsystem-version,4",
+  "-C", "link-arg=-Wl,--minor-subsystem-version,0",
+  "-C", "link-arg=-Wl,--no-insert-timestamp",
+  "-C", "link-arg=-Wl,--gc-sections",
+]
