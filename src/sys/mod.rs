@@ -26,6 +26,7 @@
 //! | `now_utc_ft()`, `now_local_ft()`, `ft_to_local(ft)` | times as FILETIME (100 ns since 1601) |
 //! | `ticks_ms()` | monotonic-ish milliseconds, only for durations |
 //! | `sleep_ms(ms)`, `spawn(closure) -> bool`, `set_title(bytes)` | threads / console |
+//! | `set_color(Some(color::X))` / `set_color(None)` | console text color / back to the user's color |
 //! | `system_spanish()` | Windows / locale language is Spanish (UI language default) |
 //! | `Lock::new()`, `lock.with(\|\| ..)` | mutual exclusion (CRITICAL_SECTION / Mutex) |
 //! | `metadata(p)`, `read_dir(p)` | file info, folder listing (no `.`/`..`) |
@@ -48,6 +49,24 @@ pub use win32::*;
 mod hosted;
 #[cfg(not(all(win32, not(test))))]
 pub use hosted::*;
+
+/// Console text colors for `set_color`: the classic 16-color console palette
+/// (`SetConsoleTextAttribute` foreground values). They work on every Windows
+/// console from 95 to 11; ANSI escape codes do not exist before Windows 10.
+pub mod color {
+    /// Time stamps, server replies and other secondary text.
+    pub const DARK_GRAY: u8 = 0x08;
+    /// "Ready", protected access and finished transfers.
+    pub const GREEN: u8 = 0x0A;
+    /// Banner, start-up line and new connections.
+    pub const CYAN: u8 = 0x0B;
+    /// Errors and 5xx replies.
+    pub const RED: u8 = 0x0C;
+    /// Warnings: open access, rejected clients, 4xx replies.
+    pub const YELLOW: u8 = 0x0E;
+    /// Normal log lines (commands, shared folder).
+    pub const WHITE: u8 = 0x0F;
+}
 
 /// Windows style error code (`GetLastError` / `WSAGetLastError`).
 /// The test backend maps `std::io::Error` onto these same numbers.

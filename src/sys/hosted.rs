@@ -119,6 +119,9 @@ pub fn spawn(f: Box<dyn FnOnce() + Send>) -> bool {
 
 pub fn set_title(_t: &[u8]) {}
 
+/// Console colors are a no-op here, so the test output stays plain text.
+pub fn set_color(_c: Option<u8>) {}
+
 /// Mutual exclusion; `with` runs a closure while holding the lock.
 pub struct Lock(std::sync::Mutex<()>);
 impl Lock {

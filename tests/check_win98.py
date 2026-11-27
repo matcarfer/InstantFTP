@@ -19,7 +19,7 @@ WIN98 = {
         ExitProcess FileTimeToLocalFileTime FileTimeToSystemTime FindClose FindFirstFileA
         FindNextFileA FormatMessageA GetCommandLineA GetCurrentDirectoryA GetFileAttributesA
         GetFileSize GetFullPathNameA GetLastError GetLocalTime GetModuleFileNameA GetProcessHeap
-        GetStdHandle GetSystemTime GetUserDefaultLangID GetSystemTimeAsFileTime GetTickCount HeapAlloc HeapFree
+        GetStdHandle GetSystemTime GetUserDefaultLangID GetConsoleScreenBufferInfo SetConsoleTextAttribute GetSystemTimeAsFileTime GetTickCount HeapAlloc HeapFree
         HeapReAlloc InitializeCriticalSection DeleteCriticalSection LeaveCriticalSection MoveFileA
         MultiByteToWideChar ReadFile RemoveDirectoryA SetConsoleTitleA SetEndOfFile
         SetFileAttributesA SetFilePointer SetLastError Sleep WideCharToMultiByte WriteFile

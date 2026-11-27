@@ -16,6 +16,7 @@ use alloc::{boxed::Box, vec, vec::Vec};
 use core::alloc::{GlobalAlloc, Layout};
 use core::ffi::c_void;
 use core::ptr::{null, null_mut};
+use core::sync::atomic::{AtomicU32, Ordering};
 
 /// Native path separator.
 pub const SEP: u8 = b'\\';
@@ -53,6 +54,17 @@ struct SOCKADDR_IN {
     port: u16, // network byte order
     addr: [u8; 4],
     zero: [u8; 8],
+}
+
+/// `CONSOLE_SCREEN_BUFFER_INFO`: only `attrs` is used (the user's colors).
+#[repr(C)]
+#[allow(dead_code)]
+struct CONSOLE_INFO {
+    size: [i16; 2],
+    cursor: [i16; 2],
+    attrs: u16,
+    window: [i16; 4],
+    max_size: [i16; 2],
 }
 
 #[repr(C)]
@@ -118,6 +130,8 @@ extern "system" {
     fn GetTickCount() -> u32;
     fn GetUserDefaultLangID() -> u16;
     fn SetConsoleTitleA(t: *const u8) -> i32;
+    fn SetConsoleTextAttribute(h: HANDLE, attrs: u16) -> i32;
+    fn GetConsoleScreenBufferInfo(h: HANDLE, info: *mut CONSOLE_INFO) -> i32;
 }
 
 #[link(name = "ws2_32")]
@@ -321,6 +335,32 @@ pub fn sleep_ms(ms: u32) {
 pub fn set_title(t: &[u8]) {
     let c = cstr(t);
     unsafe { SetConsoleTitleA(c.as_ptr()) };
+}
+
+/// The user's console colors, read once: `u32::MAX` = not read yet,
+/// `NO_CONSOLE` = stdout is redirected (file or pipe), so colors are skipped.
+static CONSOLE_ATTRS: AtomicU32 = AtomicU32::new(u32::MAX);
+const NO_CONSOLE: u32 = 0x1_0000;
+
+/// Sets the console text color (`Some(color::X)`, keeping the user's
+/// background) or restores the user's colors (`None`). Does nothing when
+/// stdout is not a console. Uses only Windows 95 console functions.
+pub fn set_color(c: Option<u8>) {
+    let h = unsafe { GetStdHandle(-11i32 as u32) };
+    let mut user = CONSOLE_ATTRS.load(Ordering::Relaxed);
+    if user == u32::MAX {
+        let mut info = CONSOLE_INFO { size: [0; 2], cursor: [0; 2], attrs: 0, window: [0; 4], max_size: [0; 2] };
+        user = if unsafe { GetConsoleScreenBufferInfo(h, &mut info) } != 0 { info.attrs as u32 } else { NO_CONSOLE };
+        CONSOLE_ATTRS.store(user, Ordering::Relaxed);
+    }
+    if user == NO_CONSOLE {
+        return;
+    }
+    let attrs = match c {
+        Some(fg) => (user as u16 & 0xF0) | fg as u16,
+        None => user as u16,
+    };
+    unsafe { SetConsoleTextAttribute(h, attrs) };
 }
 
 /// Thread entry: takes ownership of the boxed closure created by `spawn`.
