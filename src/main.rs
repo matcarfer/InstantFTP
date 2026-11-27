@@ -81,11 +81,7 @@ pub fn app_main() -> i32 {
         _ => {
             log::console_c(
                 color::RED,
-                &tr!(
-                    "Error: cannot share the folder '{}'\r\n",
-                    "Error: no se puede compartir la carpeta '{}'\r\n",
-                    lossy(&wanted)
-                ),
+                &tr!("Error: cannot share the folder '{}'\r\n", "Error: no se puede compartir la carpeta '{}'\r\n", lossy(&wanted)),
             );
             pause_if_double_clicked(&cfg);
             return 1;
