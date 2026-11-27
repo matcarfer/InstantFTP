@@ -1,10 +1,10 @@
 [package]
 name = "instantftp"
-version = "1.2.1"
+version = "1.3.0"
 edition = "2021"
-authors = ["matcarfer"]
+authors = ["Matías Ferrero (matcarfer)"]
 description = "Instant, portable FTP server: double click and the folder is shared. Windows 98 SE to 11."
-license-file = "LICENSE"
+license = "GPL-3.0-or-later"
 publish = false
 repository = "https://github.com/matcarfer/InstantFTP"
 readme = "README.md"

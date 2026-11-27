@@ -1,4 +1,4 @@
-// Copyright (c) 2026 matcarfer. All rights reserved. Proprietary, not for distribution.
+// Copyright (C) 2026 Matías Ferrero (GitHub: matcarfer). SPDX-License-Identifier: GPL-3.0-or-later
 //! Raw Win32 / Winsock 2 backend.
 //!
 //! Compatibility rules followed here so the same .exe runs on Windows 98SE..11:

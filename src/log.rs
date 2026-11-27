@@ -1,4 +1,4 @@
-// Copyright (c) 2026 matcarfer. All rights reserved. Proprietary, not for distribution.
+// Copyright (C) 2026 Matías Ferrero (GitHub: matcarfer). SPDX-License-Identifier: GPL-3.0-or-later
 //! Console + daily log file (`logs\AAAA-MM-DD.log`, a new file each day,
 //! appended if the server is started several times the same day).
 

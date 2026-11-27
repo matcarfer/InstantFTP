@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2026 matcarfer. All rights reserved. Proprietary, not for distribution.
+# Copyright (C) 2026 Matías Ferrero (GitHub: matcarfer). SPDX-License-Identifier: GPL-3.0-or-later
 """End-to-end test: runs the server binary in a temp folder (like a double
 click: no arguments, shares its own folder) and drives it with ftplib.
 

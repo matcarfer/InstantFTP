@@ -1,4 +1,4 @@
-// Copyright (c) 2026 matcarfer. All rights reserved. Proprietary, not for distribution.
+// Copyright (C) 2026 Matías Ferrero (GitHub: matcarfer). SPDX-License-Identifier: GPL-3.0-or-later
 //! Date handling without any OS or float support (works the same on Win98 and 11).
 //! Times are Windows FILETIME values: 100 ns ticks since 1601-01-01.
 

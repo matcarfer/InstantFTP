@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2026 matcarfer. All rights reserved. Proprietary, not for distribution.
+# Copyright (C) 2026 Matías Ferrero (GitHub: matcarfer). SPDX-License-Identifier: GPL-3.0-or-later
 """Verifies that InstantFTP.exe can load on Windows 98 SE:
   * PE32, console subsystem version 4.0
   * only imports from KERNEL32/WS2_32 that exist on Windows 98

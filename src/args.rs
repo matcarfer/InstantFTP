@@ -1,4 +1,4 @@
-// Copyright (c) 2026 matcarfer. All rights reserved. Proprietary, not for distribution.
+// Copyright (C) 2026 Matías Ferrero (GitHub: matcarfer). SPDX-License-Identifier: GPL-3.0-or-later
 //! Command line parsing. All options are optional: double-clicking the .exe
 //! shares the folder it lives in, on port 21, anonymous, with a daily log.
 
@@ -88,7 +88,7 @@ Options:
   -v                 Version
   folder             Folder to share (default: the folder of the .exe)
 
-InstantFTP by matcarfer - freeware - https://github.com/matcarfer/InstantFTP
+InstantFTP by Matias Ferrero (matcarfer) - free software, GPL-3.0 - https://github.com/matcarfer/InstantFTP
 ";
 
 /// Spanish help text (same content as `USAGE_EN`).
@@ -116,7 +116,7 @@ Opciones:
   -v                 Version
   carpeta            Carpeta a compartir (default: la carpeta del .exe)
 
-InstantFTP por matcarfer - gratis - https://github.com/matcarfer/InstantFTP
+InstantFTP por Matias Ferrero (matcarfer) - software libre, GPL-3.0 - https://github.com/matcarfer/InstantFTP
 ";
 
 /// Help text in the current language.

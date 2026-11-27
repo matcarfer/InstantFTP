@@ -1,12 +1,12 @@
-// Copyright (c) 2026 matcarfer. All rights reserved. Proprietary, not for distribution.
+// Copyright (C) 2026 Matías Ferrero (GitHub: matcarfer). SPDX-License-Identifier: GPL-3.0-or-later
 //! # InstantFTP - instant, portable FTP server
 //!
 //! Copy InstantFTP.exe into any folder, double-click it, and that folder is
 //! shared over FTP. A single dependency-free .exe that runs on Windows 98 SE
 //! through Windows 11.
 //!
-//! Copyright (c) 2026 matcarfer. All rights reserved. Closed source: this code
-//! is private and not licensed to anyone. The .exe is free to use (see LICENSE).
+//! Copyright (C) 2026 Matías Ferrero (GitHub: matcarfer).
+//! Free software under the GNU GPL v3 or later: see LICENSE and LICENSE.en.
 //!
 //! See README.md and ARCHITECTURE.md.
 
@@ -51,8 +51,8 @@ pub fn app_main() -> i32 {
     let argv = sys::args();
     i18n::set(args::lang_override(&argv).unwrap_or(if sys::system_spanish() { i18n::Lang::Es } else { i18n::Lang::En }));
     log::console(&tr!(
-        "InstantFTP {} by matcarfer - https://github.com/matcarfer/InstantFTP\r\n",
-        "InstantFTP {} por matcarfer - https://github.com/matcarfer/InstantFTP\r\n",
+        "InstantFTP {} by Matias Ferrero (matcarfer) - GPL-3.0 - https://github.com/matcarfer/InstantFTP\r\n",
+        "InstantFTP {} por Matias Ferrero (matcarfer) - GPL-3.0 - https://github.com/matcarfer/InstantFTP\r\n",
         VERSION
     ));
 

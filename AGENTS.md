@@ -6,9 +6,10 @@ this repository.
 ## What this project is
 
 InstantFTP: a tiny (~56 KB) portable FTP server for Windows 98 SE through 11.
-Double-clicking `InstantFTP.exe` shares the folder it lives in. Author: matcarfer.
-**Closed source**: this repository is private. The .exe is freeware (see LICENSE).
-Every source file starts with a copyright line; keep it. Never mention other
+Double-clicking `InstantFTP.exe` shares the folder it lives in. Author: Matías
+Ferrero (GitHub: matcarfer). **Open source, GPL-3.0-or-later** (LICENSE.en is the
+official text, LICENSE a Spanish summary). Every source file starts with a
+copyright + SPDX line; keep it, and add it to new files. Never mention other
 programs as inspiration or origin, in code, docs or the .exe.
 
 ## Read first
@@ -52,12 +53,13 @@ Any change to the program must bump `version` in Cargo.toml (new feature or
 visible change: minor, 1.2.0 -> 1.3.0; fix only: patch, 1.2.0 -> 1.2.1).
 Docs/tests-only changes don't.
 
-CI builds `InstantFTP.exe` as an artifact; it does NOT publish releases here.
-Releases go to the public repo **matcarfer/InstantFTP** (exe only, no source):
-download the CI artifact, rename it `InstantFTP-v<major>.<minor>.exe` (hyphen, never underscore) (keep the
-patch number if not 0), then `gh release create v<version> <exe> --repo
-matcarfer/InstantFTP` with bilingual notes (EN then ES) including the SHA-256,
-update the public README's download line and the row in matcarfer/biblioteca.
+CI builds and tests `InstantFTP.exe` on every push. On `main`, when Cargo.toml
+has a version that has no release yet, CI publishes release `v<version>` in this
+same repo with the .exe named `InstantFTP-v<major>.<minor>.exe` (hyphen, never
+underscore; keep the patch number if not 0) and its SHA-256 in the notes.
+After that: update the download link in README.md and README.en.md, delete the
+previous release (only the latest one is kept) and update the row in
+matcarfer/biblioteca if the description changed.
 
 ## Style
 

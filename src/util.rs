@@ -1,4 +1,4 @@
-// Copyright (c) 2026 matcarfer. All rights reserved. Proprietary, not for distribution.
+// Copyright (C) 2026 Matías Ferrero (GitHub: matcarfer). SPDX-License-Identifier: GPL-3.0-or-later
 //! Small byte-string helpers (file names on Windows 9x are ANSI bytes, not UTF-8,
 //! so the whole server works on `[u8]` instead of `str`).
 

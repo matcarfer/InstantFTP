@@ -1,61 +1,35 @@
-INSTANTFTP — ACUERDO DE LICENCIA DE USUARIO FINAL (GRATUITO)
+LICENCIA
 
-Copyright (c) 2026 matcarfer. Todos los derechos reservados.
+InstantFTP
+Copyright (C) 2026 Matías Ferrero (GitHub: matcarfer)
 
-English: see LICENSE.en
+English: see LICENSE.en (official text of the GNU GPL v3).
 
-Este software (el ejecutable InstantFTP, su documentación y los archivos que
-lo acompañan) es propietario y de código cerrado. Se licencia, no se vende. Al
-descargarlo, instalarlo o usarlo aceptás estos términos.
+Este programa es software libre: podés redistribuirlo y/o modificarlo bajo los
+términos de la Licencia Pública General GNU (GPL) publicada por la Free Software
+Foundation, versión 3 o (a tu elección) cualquier versión posterior
+(SPDX: GPL-3.0-or-later).
 
-1. LICENCIA DE USO
-   Podés descargar y usar el software gratis, para uso personal o comercial,
-   en todas las computadoras que sean tuyos o que controles.
+En resumen, podés:
+  - usarlo para lo que quieras, también con fines comerciales;
+  - estudiarlo y modificarlo;
+  - compartirlo, original o modificado.
+Si compartís una versión modificada, tiene que seguir bajo la GPL-3.0 o
+posterior, con su código fuente y conservando estos avisos de autoría.
 
-2. RESTRICCIONES
-   NO podés, ni en todo ni en parte:
-   a) redistribuir, volver a subir, replicar, publicar,
-      vender, alquilar o sublicenciar el software, incluso en otros sitios
-      web, sitios de descarga, paquetes o compilaciones. Para compartirlo,
-      pasá el link a la página oficial de descarga (sección 3);
-   b) modificar, adaptar, traducir, descompilar, desensamblar o hacer
-      ingeniería inversa del software, ni crear obras derivadas, salvo que la
-      ley aplicable lo permita expresamente a pesar de esta restricción;
-   c) quitar, ocultar o alterar avisos de copyright, créditos, textos de
-      licencia o links del software;
-   d) usar el software, su nombre o su marca para promocionar otro producto o
-      dar a entender que el autor lo avala.
+Este programa se distribuye con la esperanza de que sea útil, pero SIN NINGUNA
+GARANTÍA; ni siquiera la garantía implícita de COMERCIABILIDAD o APTITUD PARA UN
+PROPÓSITO PARTICULAR. Usalo bajo tu responsabilidad.
 
-3. DESCARGA OFICIAL
-   El único lugar oficial de descarga es:
-   https://github.com/matcarfer/InstantFTP/releases
-   Las copias obtenidas en otro lado no están autorizadas y pueden estar
-   modificadas o no ser seguras.
+Tus archivos y tu red
+---------------------
+El programa comparte una carpeta por la red. Sos responsable de lo que
+compartís, de quién puede acceder y de protegerlo (por ejemplo, con las
+opciones de solo lectura y de usuario y clave, y con un firewall).
 
-4. CÓDIGO FUENTE
-   El código fuente no es público y no se te licencia. Nada de este acuerdo da
-   derechos sobre el código fuente.
+Descarga oficial: https://github.com/matcarfer/InstantFTP/releases
+Las donaciones son voluntarias: no compran el software ni dan derechos extra.
 
-5. TUS ARCHIVOS Y TU RED
-   El software comparte una carpeta por la red. Sos responsable de lo que
-   compartís, de quién puede acceder y de protegerlo (por ejemplo, con las
-   opciones de solo lectura y de usuario y clave, y con un firewall).
-
-6. SIN GARANTÍA
-   EL SOFTWARE SE OFRECE "TAL CUAL", SIN GARANTÍAS DE NINGÚN TIPO, EXPRESAS O
-   IMPLÍCITAS, INCLUIDAS, ENTRE OTRAS, LAS DE COMERCIABILIDAD, ADECUACIÓN A UN
-   FIN DETERMINADO Y NO INFRACCIÓN. Lo usás bajo tu responsabilidad.
-
-7. LIMITACIÓN DE RESPONSABILIDAD
-   EN LA MÁXIMA MEDIDA QUE PERMITA LA LEY, EL AUTOR NO SERÁ RESPONSABLE POR
-   RECLAMOS, DAÑOS (INCLUIDA LA PÉRDIDA O DIVULGACIÓN DE DATOS) NI OTRA
-   RESPONSABILIDAD QUE SURJA DEL SOFTWARE O DE SU USO.
-
-8. FINALIZACIÓN
-   Esta licencia termina automáticamente si incumplís alguno de sus términos.
-   En ese caso tenés que borrar todas las copias del software.
-
-9. APOYO VOLUNTARIO
-   El software es gratis. Las donaciones opcionales (por ejemplo, en
-   https://www.patreon.com/matcarfer) son regalos voluntarios: no compran el
-   software, no dan derechos adicionales y no crean obligación de soporte.
+Este resumen no reemplaza a la licencia. El único texto legalmente válido es el
+oficial en inglés, en el archivo LICENSE.en, también disponible en
+https://www.gnu.org/licenses/gpl-3.0.html

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 matcarfer. All rights reserved. Proprietary, not for distribution.
+// Copyright (C) 2026 Matías Ferrero (GitHub: matcarfer). SPDX-License-Identifier: GPL-3.0-or-later
 //! Build script: decides which OS backend `src/sys` compiles.
 //!
 //! * Target OS Windows (the real .exe)            -> `cfg(win32)`: `no_std` + raw Win32.
