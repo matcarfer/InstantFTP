@@ -28,7 +28,7 @@
 use crate::args::Config;
 use crate::listing::long_line;
 use crate::path::{self, PathError};
-use crate::sys::{self, error_text, File, SockAddr, Socket, WriteMode, E_TIMEOUT};
+use crate::sys::{self, color, error_text, File, SockAddr, Socket, WriteMode, E_TIMEOUT};
 use crate::timefmt::{from_filetime, mdtm};
 use crate::util::{cat, cmp_ic, eq_ic, find, fmt_ipv4, parse_ipv4, parse_u16, parse_u64, parse_u8, trim};
 use crate::{log, VERSION};
@@ -135,23 +135,39 @@ pub fn run(sh: &'static Shared, ctrl: Socket, peer: SockAddr, id: u32) {
         inbuf: Vec::new(),
         buf: Vec::new(),
     };
-    s.log(crate::i18n::t("New connection", "Conexion nueva").as_bytes());
+    s.log_c(color::CYAN, crate::i18n::t("New connection", "Conexion nueva").as_bytes());
     s.reply(format!("220 InstantFTP {} ready", VERSION).as_bytes());
     while let Some(line) = s.read_line() {
         if let Flow::Close = s.dispatch(&line) {
             break;
         }
     }
-    s.log(crate::i18n::t("Connection closed", "Conexion cerrada").as_bytes());
+    s.log_c(color::DARK_GRAY, crate::i18n::t("Connection closed", "Conexion cerrada").as_bytes());
     // Sockets are closed by Drop when `s` goes out of scope.
+}
+
+/// Console color of a session log line: replies (logged indented by 4 spaces)
+/// by their code, 5xx red, 4xx yellow, the rest dark gray; client commands white.
+fn msg_color(msg: &[u8]) -> u8 {
+    match msg {
+        [b' ', b' ', b' ', b' ', b'5', ..] => color::RED,
+        [b' ', b' ', b' ', b' ', b'4', ..] => color::YELLOW,
+        [b' ', b' ', b' ', b' ', ..] => color::DARK_GRAY,
+        _ => color::WHITE,
+    }
 }
 
 impl Session {
     // ================================================================ I/O helpers
 
-    /// Writes a log line prefixed with this session's tag.
+    /// Writes a log line prefixed with this session's tag, colored by `msg_color`.
     fn log(&self, msg: &[u8]) {
-        log::line(&cat(&[&self.tag, msg]));
+        self.log_c(msg_color(msg), msg);
+    }
+
+    /// Writes a log line prefixed with this session's tag, in console color `c`.
+    fn log_c(&self, c: u8, msg: &[u8]) {
+        log::line_c(c, &cat(&[&self.tag, msg]));
     }
 
     /// Sends a single-line reply (`"250 OK"`); CRLF is appended here.
@@ -391,7 +407,7 @@ impl Session {
             b"RNTO" => self.reply(b"503 Bad sequence of commands"),
 
             _ => {
-                self.log(&cat(&[b"Unknown command '", &verb, b"'"]));
+                self.log_c(color::YELLOW, &cat(&[b"Unknown command '", &verb, b"'"]));
                 self.reply(b"500 command not recognized");
             }
         }
@@ -703,11 +719,14 @@ impl Session {
             DataMode::Passive => match self.pasv.as_ref().map(|l| l.accept(DATA_ACCEPT_MS)) {
                 Some(Ok((s, a))) if a.ip == self.peer.ip => Some(s),
                 Some(Ok((_, a))) => {
-                    self.log(&cat(&[
-                        crate::i18n::t("Rejected data connection from another IP: ", "Rechazada conexion de datos desde otra IP: ")
-                            .as_bytes(),
-                        &fmt_ipv4(a.ip),
-                    ]));
+                    self.log_c(
+                        color::YELLOW,
+                        &cat(&[
+                            crate::i18n::t("Rejected data connection from another IP: ", "Rechazada conexion de datos desde otra IP: ")
+                                .as_bytes(),
+                            &fmt_ipv4(a.ip),
+                        ]),
+                    );
                     None
                 }
                 _ => None,
@@ -850,7 +869,7 @@ impl Session {
     fn log_xfer(&self, what: &[u8], v: &[u8], bytes: u64, t0: u32) {
         let ms = sys::ticks_ms().wrapping_sub(t0).max(1) as u64;
         let kbs = bytes * 1000 / 1024 / ms;
-        self.log(&cat(&[what, b" ", v, format!(" - {} bytes, {} ms, {} KB/s", bytes, ms, kbs).as_bytes()]));
+        self.log_c(color::GREEN, &cat(&[what, b" ", v, format!(" - {} bytes, {} ms, {} KB/s", bytes, ms, kbs).as_bytes()]));
     }
 
     /// RETR: sends a file, from offset `rest` if a REST came before (resume).
@@ -963,5 +982,18 @@ impl Session {
         drop(file);
         self.log_xfer(b"STOR ok", &v, total, t0);
         self.reply(b"226 Transfer Complete");
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn log_colors() {
+        assert_eq!(msg_color(b"    550 No such file or directory"), color::RED);
+        assert_eq!(msg_color(b"    421 Too many connections"), color::YELLOW);
+        assert_eq!(msg_color(b"    226 Transfer Complete"), color::DARK_GRAY);
+        assert_eq!(msg_color(b"RETR foto.jpg"), color::WHITE);
     }
 }

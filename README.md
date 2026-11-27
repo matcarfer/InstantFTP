@@ -2,7 +2,7 @@
 
 <h1 align="center">InstantFTP</h1>
 
-<h2 align="center"><a href="https://github.com/matcarfer/InstantFTP/releases/download/v1.3.0/InstantFTP-v1.3.exe">⬇ Descargar EXE</a></h2>
+<h2 align="center"><a href="https://github.com/matcarfer/InstantFTP/releases/download/v1.3.1/InstantFTP-v1.3.1.exe">⬇ Descargar EXE</a></h2>
 
 <p align="center">
   <b>Español</b> · <a href="README.en.md">English</a><br><br>
@@ -12,7 +12,7 @@ Servidor FTP portable, súper rápido y liviano (56 KB), sin interfaz gráfica. 
 </p>
 
 <p align="center">
-  <img src="docs/ventana-v1.3.png" width="80%" alt="InstantFTP">
+  <img src="docs/ventana-v1.3.1.png" width="80%" alt="InstantFTP">
 </p>
 
 **Cómo se usa:** copialo en una carpeta y hacé doble clic. Esa carpeta queda compartida hasta que cerrás la ventana.

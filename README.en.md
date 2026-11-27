@@ -2,7 +2,7 @@
 
 <h1 align="center">InstantFTP</h1>
 
-<h2 align="center"><a href="https://github.com/matcarfer/InstantFTP/releases/download/v1.3.0/InstantFTP-v1.3.exe">⬇ Download EXE</a></h2>
+<h2 align="center"><a href="https://github.com/matcarfer/InstantFTP/releases/download/v1.3.1/InstantFTP-v1.3.1.exe">⬇ Download EXE</a></h2>
 
 <p align="center">
   <a href="README.md">Español</a> · <b>English</b><br><br>
@@ -12,7 +12,7 @@ Portable FTP server, super fast and lightweight (56 KB), no GUI. Open source.<br
 </p>
 
 <p align="center">
-  <img src="docs/window-v1.3.png" width="80%" alt="InstantFTP">
+  <img src="docs/window-v1.3.1.png" width="80%" alt="InstantFTP">
 </p>
 
 **How to use:** copy it into a folder and double-click it. That folder is shared until you close the window.

@@ -29,7 +29,7 @@ use alloc::{boxed::Box, format, string::String, vec::Vec};
 use args::ArgOutcome;
 use core::sync::atomic::{AtomicU32, Ordering};
 use session::Shared;
-use sys::Socket;
+use sys::{color, Socket};
 use util::fmt_ipv4;
 
 /// Version from Cargo.toml, shown in the banner, the 220 greeting and STAT.
@@ -50,11 +50,14 @@ pub fn app_main() -> i32 {
     // Language: -lang option, otherwise the language Windows is installed in.
     let argv = sys::args();
     i18n::set(args::lang_override(&argv).unwrap_or(if sys::system_spanish() { i18n::Lang::Es } else { i18n::Lang::En }));
-    log::console(&tr!(
-        "InstantFTP {} by Matias Ferrero (matcarfer) - GPL-3.0 - https://github.com/matcarfer/InstantFTP\r\n",
-        "InstantFTP {} por Matias Ferrero (matcarfer) - GPL-3.0 - https://github.com/matcarfer/InstantFTP\r\n",
-        VERSION
-    ));
+    log::console_c(
+        color::CYAN,
+        &tr!(
+            "InstantFTP {} by Matias Ferrero (matcarfer) - GPL-3.0 - https://github.com/matcarfer/InstantFTP\r\n",
+            "InstantFTP {} por Matias Ferrero (matcarfer) - GPL-3.0 - https://github.com/matcarfer/InstantFTP\r\n",
+            VERSION
+        ),
+    );
 
     let cfg = match args::parse(&argv) {
         ArgOutcome::Run(c) => c,
@@ -64,7 +67,8 @@ pub fn app_main() -> i32 {
         }
         ArgOutcome::Version => return 0,
         ArgOutcome::Error(e) => {
-            log::console(&format!("Error: {}\r\n\r\n{}", e, args::usage().replace('\n', "\r\n")));
+            log::console_c(color::RED, &format!("Error: {}\r\n\r\n", e));
+            log::console(&args::usage().replace('\n', "\r\n"));
             return 1;
         }
     };
@@ -75,11 +79,10 @@ pub fn app_main() -> i32 {
     let root = match sys::full_path(&wanted) {
         Some(r) if sys::metadata(&r).map(|m| m.is_dir).unwrap_or(false) => r,
         _ => {
-            log::console(&tr!(
-                "Error: cannot share the folder '{}'\r\n",
-                "Error: no se puede compartir la carpeta '{}'\r\n",
-                lossy(&wanted)
-            ));
+            log::console_c(
+                color::RED,
+                &tr!("Error: cannot share the folder '{}'\r\n", "Error: no se puede compartir la carpeta '{}'\r\n", lossy(&wanted)),
+            );
             pause_if_double_clicked(&cfg);
             return 1;
         }
@@ -109,7 +112,8 @@ pub fn app_main() -> i32 {
     }
 
     if !sys::net_init() {
-        log::line(
+        log::line_c(
+            color::RED,
             i18n::t(
                 "Error: Winsock 2 is required (on Windows 95 install the 'Winsock 2 Update')",
                 "Error: se necesita Winsock 2 (en Windows 95 instalar 'Winsock 2 Update')",
@@ -155,22 +159,27 @@ pub fn app_main() -> i32 {
         u
     };
 
-    log::line(tr!("=== InstantFTP {} started ===", "=== InstantFTP {} iniciado ===", VERSION).as_bytes());
+    log::line_c(color::CYAN, tr!("=== InstantFTP {} started ===", "=== InstantFTP {} iniciado ===", VERSION).as_bytes());
     log::line(tr!("Sharing: {}", "Compartiendo: {}", lossy(&root)).as_bytes());
     let mode = if cfg.read_only { i18n::t("read only", "solo lectura") } else { i18n::t("read and write", "lectura y escritura") };
     let who = match &cfg.login {
         Some((u, _)) => tr!(", user '{}'", ", usuario '{}'", lossy(u)),
         None => String::from(i18n::t(", no user name (anonymous)", ", sin usuario (anonimo)")),
     };
-    log::line(tr!("Access: {}{}", "Acceso: {}{}", mode, who).as_bytes());
+    // Anyone can write: yellow warning. Read only or with a password: green.
+    let access = if cfg.read_only || cfg.login.is_some() { color::GREEN } else { color::YELLOW };
+    log::line_c(access, tr!("Access: {}{}", "Acceso: {}{}", mode, who).as_bytes());
     for ip in &ips {
-        log::line(tr!("Ready! Connect to {}", "Listo! Conectate a {}", url(*ip)).as_bytes());
+        log::line_c(color::GREEN, tr!("Ready! Connect to {}", "Listo! Conectate a {}", url(*ip)).as_bytes());
     }
-    log::console(&tr!(
-        "Log: {}\r\nClose this window (or press Ctrl+C) to stop the server.\r\n\r\n",
-        "Log: {}\r\nCerra esta ventana (o Ctrl+C) para detener el servidor.\r\n\r\n",
-        log_note
-    ));
+    log::console_c(
+        color::DARK_GRAY,
+        &tr!(
+            "Log: {}\r\nClose this window (or press Ctrl+C) to stop the server.\r\n\r\n",
+            "Log: {}\r\nCerra esta ventana (o Ctrl+C) para detener el servidor.\r\n\r\n",
+            log_note
+        ),
+    );
     sys::set_title(format!("InstantFTP - {} - {}", url(ips[0]), lossy(&root)).as_bytes());
 
     let shared: &'static Shared = Box::leak(Box::new(Shared {
@@ -194,7 +203,8 @@ pub fn app_main() -> i32 {
         let max = shared.cfg.max_clients;
         if max != 0 && shared.clients.load(Ordering::Relaxed) >= max {
             let _ = sock.send_all(b"421 Too many connections, try again later\r\n");
-            log::line(
+            log::line_c(
+                color::YELLOW,
                 tr!("Rejected {}: too many clients ({})", "Rechazado {}: demasiados clientes ({})", lossy(&fmt_ipv4(peer.ip)), max)
                     .as_bytes(),
             );
@@ -208,7 +218,8 @@ pub fn app_main() -> i32 {
         }));
         if !started {
             shared.clients.fetch_sub(1, Ordering::Relaxed);
-            log::line(
+            log::line_c(
+                color::RED,
                 i18n::t("Error: could not create a thread for the client", "Error: no se pudo crear el hilo para el cliente").as_bytes(),
             );
         }
@@ -217,7 +228,8 @@ pub fn app_main() -> i32 {
 
 /// Reports that the control port could not be opened and returns exit code 1.
 fn fail_port(cfg: &args::Config, port: u16) -> i32 {
-    log::line(
+    log::line_c(
+        color::RED,
         tr!(
             "Error: could not open port {} (already in use?). Try -p 2121",
             "Error: no se pudo abrir el puerto {} (ya esta en uso?). Proba con -p 2121",
